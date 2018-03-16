@@ -2,104 +2,116 @@
 using Retromono.Tweens;
 using Xunit;
 
-namespace Tests {
-    public class TweenAwaitTest {
-        [Fact]
-        public void ShouldThrowErrorWhenNoFunctionPassedInConstructor() {
-            Assert.Throws<ArgumentNullException>(() => new TweenAwait(null));
-        }
+namespace Tests
+{
+	public class TweenAwaitTest
+	{
+		[Fact]
+		public void ShouldThrowErrorWhenNoFunctionPassedInConstructor()
+		{
+			Assert.Throws<ArgumentNullException>(() => new TweenAwait(null));
+		}
 
-        [Theory]
-        [InlineData(0L)]
-        [InlineData(1L)]
-        [InlineData(100L)]
-        [InlineData(1024L * 1024L * 1024L)]
-        public void ShouldCallAwaitCallbackOnAdvanceRegardlessOfTimeSpanPassed(long ticks) {
-            var awaitCallCount = 0;
-            var tween = new TweenAwait(() => {
-                awaitCallCount++;
-                return false;
-            });
+		[Theory]
+		[InlineData(0L)]
+		[InlineData(1L)]
+		[InlineData(100L)]
+		[InlineData(1024L * 1024L * 1024L)]
+		public void ShouldCallAwaitCallbackOnAdvanceRegardlessOfTimeSpanPassed(long ticks)
+		{
+			var awaitCallCount = 0;
+			var tween = new TweenAwait(() =>
+			{
+				awaitCallCount++;
+				return false;
+			});
 
-            tween.Advance(new TimeSpan(ticks));
-            Assert.Equal(1, awaitCallCount);
-        }
+			tween.Advance(new TimeSpan(ticks));
+			Assert.Equal(1, awaitCallCount);
+		}
 
-        [Theory]
-        [InlineData(0L)]
-        [InlineData(1L)]
-        [InlineData(100L)]
-        [InlineData(1024L * 1024L * 1024L)]
-        public void ShouldReturnPassedTimeSpanWhenAwaitCallbackReturnsFalse(long ticks) {
-            var tween = new TweenAwait(() => false);
+		[Theory]
+		[InlineData(0L)]
+		[InlineData(1L)]
+		[InlineData(100L)]
+		[InlineData(1024L * 1024L * 1024L)]
+		public void ShouldReturnPassedTimeSpanWhenAwaitCallbackReturnsFalse(long ticks)
+		{
+			var tween = new TweenAwait(() => false);
 
-            var result = tween.Advance(new TimeSpan(ticks));
+			var result = tween.Advance(new TimeSpan(ticks));
 
-            Assert.Equal(ticks, result.Ticks);
-        }
+			Assert.Equal(ticks, result.Ticks);
+		}
 
-        [Fact]
-        public void ShouldStayUnfinishedWhenAwaitCallbackReturnFalse() {
-            var tween = new TweenAwait(() => false);
+		[Fact]
+		public void ShouldStayUnfinishedWhenAwaitCallbackReturnFalse()
+		{
+			var tween = new TweenAwait(() => false);
 
-            var result = tween.Advance(new TimeSpan(1));
+			var result = tween.Advance(new TimeSpan(1));
 
-            Assert.False(tween.IsFinished);
-        }
+			Assert.False(tween.IsFinished);
+		}
 
-        [Fact]
-        public void ShouldBecomeFinishedWhenAwaitCallbackReturnTrue() {
-            var tween = new TweenAwait(() => true);
+		[Fact]
+		public void ShouldBecomeFinishedWhenAwaitCallbackReturnTrue()
+		{
+			var tween = new TweenAwait(() => true);
 
-            var result = tween.Advance(new TimeSpan(1));
+			var result = tween.Advance(new TimeSpan(1));
 
-            Assert.True(tween.IsFinished);
-        }
+			Assert.True(tween.IsFinished);
+		}
 
-        [Fact]
-        public void ShouldNotCallAwaitCallbackWhenAlreadyFinished() { 
-            var awaitCallCount = 0;
-            var tween = new TweenAwait(() => {
-                awaitCallCount++;
-                return true;
-            });
+		[Fact]
+		public void ShouldNotCallAwaitCallbackWhenAlreadyFinished()
+		{
+			var awaitCallCount = 0;
+			var tween = new TweenAwait(() =>
+			{
+				awaitCallCount++;
+				return true;
+			});
 
-            tween.Advance(new TimeSpan(1));
-            tween.Advance(new TimeSpan(1));
-            tween.Advance(new TimeSpan(1));
-            tween.Advance(new TimeSpan(1));
+			tween.Advance(new TimeSpan(1));
+			tween.Advance(new TimeSpan(1));
+			tween.Advance(new TimeSpan(1));
+			tween.Advance(new TimeSpan(1));
 
-            Assert.Equal(1, awaitCallCount);
-        }
+			Assert.Equal(1, awaitCallCount);
+		}
 
-        [Fact]
-        public void ShouldBecomeFinishedAndNotCallAwaitCallback_Finish()
-        {
-            var awaitCallCount = 0;
-            var tween = new TweenAwait(() => {
-                awaitCallCount++;
-                return true;
-            });
+		[Fact]
+		public void ShouldBecomeFinishedAndNotCallAwaitCallback_Finish()
+		{
+			var awaitCallCount = 0;
+			var tween = new TweenAwait(() =>
+			{
+				awaitCallCount++;
+				return true;
+			});
 
-            tween.Finish();
+			tween.Finish();
 
-            Assert.True(tween.IsFinished);
-            Assert.Equal(0, awaitCallCount);
-        }
+			Assert.True(tween.IsFinished);
+			Assert.Equal(0, awaitCallCount);
+		}
 
-        [Fact]
-        public void ShouldBecomeFinishedAndNotCallAwaitCallback_Skip()
-        {
-            var awaitCallCount = 0;
-            var tween = new TweenAwait(() => {
-                awaitCallCount++;
-                return true;
-            });
+		[Fact]
+		public void ShouldBecomeFinishedAndNotCallAwaitCallback_Skip()
+		{
+			var awaitCallCount = 0;
+			var tween = new TweenAwait(() =>
+			{
+				awaitCallCount++;
+				return true;
+			});
 
-            tween.Skip();
+			tween.Skip();
 
-            Assert.True(tween.IsFinished);
-            Assert.Equal(0, awaitCallCount);
-        }
-    }
+			Assert.True(tween.IsFinished);
+			Assert.Equal(0, awaitCallCount);
+		}
+	}
 }

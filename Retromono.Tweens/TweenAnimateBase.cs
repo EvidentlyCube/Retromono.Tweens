@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace Retromono.Tweens {
+namespace Retromono.Tweens
+{
 	/// <summary>
 	/// Parent for any tween that wants to support some kind animation or transition between two values with optional easing.
 	/// </summary>
@@ -10,7 +11,8 @@ namespace Retromono.Tweens {
 	/// Check <see cref="TweenAnimateDouble"/> for an example of a minimal tween that uses it.
 	/// </remarks>
 	/// <seealso cref="TweenAnimateDouble"/>
-	public abstract class TweenAnimateBase : TweenSleep {
+	public abstract class TweenAnimateBase : TweenSleep
+	{
 		/// <summary>
 		/// Optional easing function which takes one param, time, and returns modified time. <see cref="https://github.com/RetrocadeNet/Retromono.Easings"/>
 		/// </summary>
@@ -28,23 +30,28 @@ namespace Retromono.Tweens {
 		/// <param name="easingFunction">Optional easing function.</param>
 		/// <param name="finishedCallback">Function called once at the end of the tween</param>
 		/// <seealso href="https://github.com/RetrocadeNet/Retromono.Easings"/>
-		protected TweenAnimateBase(TimeSpan duration, Func<double, double> easingFunction = null, Action finishedCallback = null) : base(duration, finishedCallback) {
-            _easingFunction = easingFunction;
-        }
+		protected TweenAnimateBase(
+			TimeSpan duration,
+			Func<double, double> easingFunction = null,
+			Action finishedCallback = null
+		) : base(duration, finishedCallback)
+		{
+			_easingFunction = easingFunction;
+		}
 
 		/// <summary>
 		/// Raw time factor going between 0 (starting position) and 1 (final position, inclusive).
 		/// It is made private because it does not include the optional easing.
 		/// </summary>
-	    private double RawTimeFactor => (double)(Duration.Ticks - RemainingDuration.Ticks) / Duration.Ticks;
+		private double RawTimeFactor => (double) (Duration.Ticks - RemainingDuration.Ticks) / Duration.Ticks;
 
-	    /// <summary>
-	    /// Returns the time factor (value between 0 and 1, inclusive() that tells you the position of the tween, after being modified by the easing function.
-	    /// </summary>
-	    /// <remarks>
-	    /// By default at the start of the animation it will return 0 and at the end it will return 1. It will NOT check if the easing function returns correct values so,
-	    /// for example, if <c>easing(1)</c> returns <c>0.5</c>, when the tween finishes this will return 0.5 and, most likely, is not an expected result.
-	    /// </remarks>
-	    protected double TimeFactor => _easingFunction?.Invoke(RawTimeFactor) ?? RawTimeFactor;
+		/// <summary>
+		/// Returns the time factor (value between 0 and 1, inclusive() that tells you the position of the tween, after being modified by the easing function.
+		/// </summary>
+		/// <remarks>
+		/// By default at the start of the animation it will return 0 and at the end it will return 1. It will NOT check if the easing function returns correct values so,
+		/// for example, if <c>easing(1)</c> returns <c>0.5</c>, when the tween finishes this will return 0.5 and, most likely, is not an expected result.
+		/// </remarks>
+		protected double TimeFactor => _easingFunction?.Invoke(RawTimeFactor) ?? RawTimeFactor;
 	}
 }
