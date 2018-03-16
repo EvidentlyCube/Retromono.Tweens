@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Retromono.Tweens", "Retromono.Tweens\Retromono.Tweens.csproj", "{4A58C080-77EA-4C8F-B3FE-BF10977A29DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{B2A44627-7178-4B66-A0D0-4726A97C0BD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A58C080-77EA-4C8F-B3FE-BF10977A29DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A58C080-77EA-4C8F-B3FE-BF10977A29DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A58C080-77EA-4C8F-B3FE-BF10977A29DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A58C080-77EA-4C8F-B3FE-BF10977A29DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A44627-7178-4B66-A0D0-4726A97C0BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A44627-7178-4B66-A0D0-4726A97C0BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A44627-7178-4B66-A0D0-4726A97C0BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A44627-7178-4B66-A0D0-4726A97C0BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62EE0AF4-8329-44F7-902A-71250D6AC58B}
+	EndGlobalSection
+EndGlobal
