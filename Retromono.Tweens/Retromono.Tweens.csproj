@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Maurycy Zarzycki</Authors>
     <Company>Maurycy Zarzycki Evidently Cube</Company>
     <Description>A minimal and extensible tweening library intended to use with game engines - MonoGame, XNA, FNA, Unity and others.</Description>
@@ -9,6 +8,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>tween;gamedev;games;monogame</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFrameworks>net45;net46;net471;netstandard2.0</TargetFrameworks>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>Made it available for more platforms; new optional param to TweenCallback</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <DocumentationFile>bin\Retromono.Tweens.xml</DocumentationFile>

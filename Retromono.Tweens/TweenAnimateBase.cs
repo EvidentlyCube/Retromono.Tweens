@@ -14,7 +14,7 @@ namespace Retromono.Tweens
 	public abstract class TweenAnimateBase : TweenSleep
 	{
 		/// <summary>
-		/// Optional easing function which takes one param, time, and returns modified time. <see cref="https://github.com/RetrocadeNet/Retromono.Easings"/>
+		/// Optional easing function which takes one param, time, and returns modified time. <see href="https://github.com/EvidentlyCube/Retromono.Easings"/>
 		/// </summary>
 		private readonly Func<double, double> _easingFunction;
 
